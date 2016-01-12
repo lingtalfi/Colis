@@ -15,7 +15,15 @@ require_once 'inc/colis_init.php';
  * and the colis_upload.php script was much faster, I could see the difference with the eyes:
  * each chunk takes a few milliseconds more with the script below...
  * 
- * So personnally, I prefer to tweak the code of colis_upload.php and have better perfs, than having
+ * 
+ * Actually I did a test on my local machine, uploading a 124M mp4 file:
+ * 
+ * - colis_upload: 13 seconds (approximately)
+ * - colis_upload_new: 28 seconds (approximately)
+ * 
+ * 
+ * 
+ * So personally, I prefer to tweak the code of colis_upload.php and have better perfs, than having
  * more organized but slower code.
  * 
  * Now, if YOU would go the other way around, please feel free to use the code below, and continue the development
