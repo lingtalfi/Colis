@@ -1,4 +1,6 @@
-
+/*******************************
+// TYPE AHEAD
+*******************************/
 .colis_wrapper .tt-menu,
 .colis_wrapper .gist {
     text-align: left;
@@ -74,6 +76,10 @@
     margin: 0;
 }
 
+
+/*******************************
+// DROP ZONE
+*******************************/
 .colis_dropzone {
     background: white none repeat scroll 0 0;
     border: 2px dashed #0087f7;
@@ -100,6 +106,10 @@
     height: 20px;
 }
 
+
+/*******************************
+// PREVIEW
+*******************************/
 .colis_preview {
     background: #c3c3c3 none repeat scroll 0 0;
     border-radius: 5px;

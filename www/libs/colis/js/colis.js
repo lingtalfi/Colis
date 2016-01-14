@@ -88,7 +88,13 @@ if ('undefined' === typeof window.colis) {
                 onRequestError: function (m) {
                     console.log(m);
                 },
-                urlInfo: '/libs/colis/service/colis_info.php'
+                urlInfo: '/libs/colis/service/ling/colis_info_fast.php',
+                /**
+                 * void  function ( info )
+                 *      What's inside info depends on your implementation.
+                 *      info array is returned from the colis_info service.
+                 */
+                onPreviewDisplayAfter: noop
             }, options);
 
             this.get = function (k) {
@@ -126,7 +132,7 @@ if ('undefined' === typeof window.colis) {
 
             var jInput = conf.jInput;
             if (!jInput instanceof jQuery) {
-                this.error("Invalid jInput");
+                this.devError("Invalid jInput");
             }
 
 
@@ -148,7 +154,10 @@ if ('undefined' === typeof window.colis) {
             start: function () {
                 this.build();
             },
-            error: function (msg) {
+            devError: function (msg) {
+                console.log('colis error: ' + msg);
+            },
+            userError: function (msg) {
                 console.log('colis error: ' + msg);
             },
             /**
@@ -158,6 +167,7 @@ if ('undefined' === typeof window.colis) {
                 var zis = this;
                 this.requestInfo(this.getPayload({name: name}), function (info) {
                     zis.getPreview().display(info);
+                    zis.get('onPreviewDisplayAfter')(info, zis);
                 });
             },
             /**

@@ -42,39 +42,36 @@
         var colis = window.colis;
 
 
+        var chunkErrorCode = 403;
+
+
         /**
          * dictionnary
          */
-        window.colisDictionnary = function () {
-        };
-        window.colisDictionnary.prototype = {
-            load: function () {
-                this.values = {
-                    'Refresh': 'Refresh',
-                    'Halt': 'Halt',
-                    'Resume': 'Resume',
-                    'Remove': 'Remove',
-                    'Drop files here to upload': 'Drop files here to upload',
-                    'Browse': 'Browse',
-                    'Duration': 'Duration',
-                    'Title': 'Title',
-                    'Description': 'Description',
-                    'Unknown': 'Unknown'
-                };
-            }
+        window.colisDictionnary = {
+            'Refresh': 'Refresh',
+            'Halt': 'Halt',
+            'Resume': 'Resume',
+            'Remove': 'Remove',
+            'Drop files here to upload': 'Drop files here to upload',
+            'Browse': 'Browse',
+            'Duration': 'Duration',
+            'Title': 'Title',
+            'Description': 'Description',
+            'Unknown': 'Unknown'
         };
 
         //------------------------------------------------------------------------------/
         // GLOBAL SOUP
         //------------------------------------------------------------------------------/
-        var oDict = new window.colisDictionnary();
+
         var _ = function (m) {
-            return oDict.values[m];
+            return window.colisDictionnary[m];
         };
-        var jWrapper = null; // contains the whole wrapper (see html structure)
+
 
         function formatDuration(duration) {
-            if('' === duration){
+            if ('' === duration) {
                 return _("Unknown");
             }
             var sec_num = parseInt(duration, 10);
@@ -94,8 +91,8 @@
             var time = hours + ':' + minutes + ':' + seconds;
             return time + 's';
         }
-        
-        function encodeUrl(url){
+
+        function encodeUrl(url) {
             var p = url.split('/');
             var lastComponent = p.pop();
             return p.join('/') + '/' + encodeURIComponent(lastComponent);
@@ -139,13 +136,16 @@
             var options = $.extend({
                 hint: true,
                 highlight: true,
-                minLength: 1
+                minLength: 1,
+                classNames: {
+                    menu: 'tt-menu'
+                }
             }, conf.options);
             var datasets = $.extend({
                 name: 'myDataset',
                 limit: 100,
                 source: substringMatcher()
-            }, conf.options);
+            }, conf.datasets);
 
             jInput.typeahead(options, datasets);
             jInput.bind('typeahead:select', function (ev, suggestion) {
@@ -188,21 +188,37 @@
         };
         preview.prototype.build = function (oColis, conf) {
 
-            this.buildTemplate(jWrapper); // builds jPreview
+            this.buildTemplate(oColis.jWrapper); // builds jPreview
 
             var options = $.extend({
-                // required
+                /**
+                 * This is required, but this is automatically set to the right value if you
+                 * instantiate colis as a jquery plugin
+                 */
                 jPreview: this.jPreview,
                 /**
-                 * Handler know how to display the info coming from the server.
-                 * This implementation expects that the info map contains at least a "type" key which value
-                 * is something like "image", or "video".
+                 * Whether or not to display the preview on startup.
+                 * The default is false to save some space on the page.
+                 */
+                showOnStartup: false,
+                /**
+                 * Handler know how to display the info coming from the info service.
                  *
-                 * The info looks like this:
+                 * Every type of info has its own handler.
+                 * You can create your own handlers.
+                 *
+                 * The default (builtin) handlers are image, localVideo, externalVideo, youtube and none.
+                 *
+                 *
+                 * This implementation expects that the info map contains at least a "type" key which value
+                 * is something like "image", or "video", or "none" if no info was available.
+                 *
+                 *
+                 * For instance, the info map corresponding to the "image" handler should look like this:
                  *
                  * - info:
                  * ----- type: image
-                 * ----- src: /absolute/url/to/image.jpg  (possibly starting with http://)
+                 * ----- src: /url/to/image.jpg  (or possibly starting with http://)
                  *
                  *
                  *
@@ -213,7 +229,7 @@
                         jPreview.find(".colis_polaroids").empty().append('<li><a href="' + url + '" target="_blank' +
                         '"><img src="' + url + '" alt="' + url + '"></a></li>');
                     },
-                    video: function (info, jPreview) {
+                    localVideo: function (info, jPreview) {
                         var url = info.src;
                         var duration = info.duration;
 
@@ -227,6 +243,17 @@
                         '<li>' + _("Duration") + ': ' + formatDuration(duration) + '</li>' +
                         '</ul></div>' +
                         '</div>' +
+                        '</li>');
+                    },
+                    externalVideo: function (info, jPreview) {
+                        var url = info.src;
+                        var duration = info.duration;
+
+                        jPreview.find(".colis_polaroids").empty().append('<li>' +
+                        '<video width="100" controls>' +
+                        '<source src="' + encodeUrl(url) + '" type="video/mp4">' +
+                        'Your browser does not support the video tag.' +
+                        '</video>' +
                         '</li>');
                     },
                     youtube: function (info, jPreview) {
@@ -259,13 +286,21 @@
 
 
             if (!options.jPreview instanceof jQuery) {
-                oColis.error("Invalid jInput");
+                oColis.devError("Invalid jPreview");
+            }
+
+            if (true === options.showOnStartup) {
+                options.jPreview.show();
+            }
+            else {
+                options.jPreview.hide();
             }
 
 
         };
 
         preview.prototype.display = function (info) {
+            this.get('jPreview').show();
             this.get('handlers')[info.type](info, this.get('jPreview'));
         };
 
@@ -306,21 +341,39 @@
         uploader.prototype.build = function (oColis, conf) {
 
 
-            this.buildTemplate(jWrapper);  // builds jDropZone and jBrowse
+            this.buildTemplate(oColis.jWrapper);  // builds jDropZone and jBrowse
 
+
+            var defaultId = "none";
+            var reqPayload = oColis.get('requestPayload');
+            if ('undefined' !== typeof reqPayload.id) {
+                defaultId = reqPayload.id;
+            }
+            
+            
 
             var zis = this;
             var options = $.extend({
                 //------------------------------------------------------------------------------/
                 // THIS IMPLEMENTATION'S SPECIFIC OPTIONS
                 //------------------------------------------------------------------------------/
-                jDropZone: this.jDropZone, // required
+                /**
+                 * required, but automatically set if you instantiate your
+                 * colis as a jquery plugin.
+                 */
+                jDropZone: this.jDropZone,
 
                 //------------------------------------------------------------------------------/
                 // PLUPLOAD OPTIONS
                 //------------------------------------------------------------------------------/
+                /**
+                 * Please refer to plupload documentation for more details.
+                 */
                 browse_button: this.jBrowse[0],
-                url: '/libs/colis/service/colis_upload.php',
+                url: '/libs/colis/service/ling/colis_upload_fast.php',
+                multipart_params: {
+                    id: defaultId
+                },
                 filters: {
                     // Specify what files to browse for
                     mime_types: [
@@ -330,6 +383,9 @@
                     // Maximum file size
                     max_file_size: '2000mb'
                 },
+                /**
+                 * I noticed that the bigger the chunk, the faster the upload...
+                 */
                 chunk_size: '1mb',
                 unique_names: false,
                 drop_element: this.jDropZone[0]
@@ -374,7 +430,12 @@
                 });
 
                 plup.bind('Error', function (up, err) {
-                    oColis.error('plupload: ' + err.message);
+                    var errMsg = err.message;
+                    if (chunkErrorCode === err.status) { // tim error
+                        var response = JSON.parse(err.response);
+                        errMsg = response.m;
+                    }
+                    oColis.userError(errMsg);
                 });
 
 
@@ -403,7 +464,7 @@
 
             }
             else {
-                oColis.error("colis-ling uploader: undefined jDropZone");
+                oColis.devError("colis-ling uploader: undefined jDropZone");
             }
         };
 
@@ -424,8 +485,10 @@
         uploader.prototype.refreshView = function () {
             this.jProgress.hide();
             this.jFileName.hide();
+            this.jFileName.parent().hide();
             this.jPercent.hide();
             this.jCancelButton.hide();
+            this.jCancelButton.parent().hide();
             this.jResumeButton.hide();
             this.jRemoveButton.hide();
             this.uploadProgress(0);
@@ -436,8 +499,10 @@
             this.uploadProgress(0);
             this.jProgress.show();
             this.jFileName.show();
+            this.jFileName.parent().show();
             this.jPercent.show();
             this.jCancelButton.show();
+            this.jCancelButton.parent().show();
             this.jResumeButton.hide();
             this.jRemoveButton.hide();
         };
@@ -448,15 +513,15 @@
         //------------------------------------------------------------------------------/
         colis.prototype.buildTemplate = function (jInput) {
             jInput.wrap('<div class="colis_wrapper"><div class="colis_selector_wrapper"></div></div>');
-            jWrapper = jInput.parent().parent();
+            var jWrapper = jInput.parent().parent();
+            return jWrapper;
         };
         colis.prototype.build = function () {
 
-            oDict.load(); // lazy dict loading
 
             var conf = this.getConf();
             // first build yourself, THEN build the helpers...
-            this.buildTemplate(conf.jInput);
+            this.jWrapper = this.buildTemplate(conf.jInput);
             this.getSelector().build(this, conf.selector);
             this.getPreview().build(this, conf.preview);
             this.getUploader().build(this, conf.uploader);
