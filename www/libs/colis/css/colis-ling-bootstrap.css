@@ -81,7 +81,7 @@ ul.colis_polaroids img {
 }
 
 ul.colis_polaroids video,
-ul.colis_polaroids iframe{  
+ul.colis_polaroids iframe{
     width: 30%;
 }
 
@@ -92,7 +92,7 @@ ul.colis_polaroids iframe{
 }
 
 .colis_preview_additional_info .inner{
-    padding: 30px;
+    padding: 15px;
     background: white;
     border-radius: 5px;
     width: 100%;
