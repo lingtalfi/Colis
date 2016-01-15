@@ -17,7 +17,7 @@
 
 if ('undefined' === typeof window.colis) {
     (function () {
-        
+
         //------------------------------------------------------------------------------/
         // 
         //------------------------------------------------------------------------------/
@@ -66,36 +66,46 @@ if ('undefined' === typeof window.colis) {
             oPreview = new window.colisClasses.preview();
 
 
-            var conf = $.extend({
-                /**
-                 * This is sent with each request.
-                 * You can use this to build application logic.
-                 */
-                requestPayload: {},
-                /**
-                 * Items can be:
-                 * - an array of item names
-                 * - ...maybe later we'll need to fetch data from a service, but for now an array suffices...
-                 */
-                items: [],
-                jInput: null,
-                // uploader reserved conf
-                uploader: {},
-                // preview reserved conf
-                preview: {},
-                // selector reserved conf
-                selector: {},
-                onRequestError: function (m) {
-                    console.log(m);
-                },
-                urlInfo: '/libs/colis/service/ling/colis_info_fast.php',
-                /**
-                 * void  function ( info )
-                 *      What's inside info depends on your implementation.
-                 *      info array is returned from the colis_info service.
-                 */
-                onPreviewDisplayAfter: noop
-            }, options);
+            var conf = $.extend(
+                {
+                    selector: {}, // selector reserved conf
+                    preview: {}, // preview reserved conf
+                    uploader: {}, // uploader reserved conf
+
+                    /**
+                     * This is the jquery handle to the selector element.
+                     * It is required but set automatically if you instantiate colis
+                     * as a jquery plugin
+                     */
+                    jInput: null,
+                    /**
+                     * The items to display in the selector.
+                     * Items can be:
+                     * - an array of item names
+                     */
+                    items: [],
+                    /**
+                     * url of the info service
+                     */
+                    urlInfo: '/libs/colis/service/ling/colis_info_fast.php',
+                    /**
+                     * This should be sent to each service request.
+                     * You can use this to build application logic.
+                     */
+                    requestPayload: {},
+                    /**
+                     * Should be called everytime a service call responds with an (tim) error
+                     */
+                    onRequestError: function (m) {
+                        console.log(m);
+                    },
+                    /**
+                     * void  function ( info )
+                     *      What's inside info depends on your implementation.
+                     *      info array is returned from the colis_info service.
+                     */
+                    onPreviewDisplayAfter: noop
+                }, options);
 
             this.get = function (k) {
                 if (k in conf) {
@@ -180,12 +190,12 @@ if ('undefined' === typeof window.colis) {
                 this.getPreview().display(nameAndInfo.info);
             }
         };
-        
 
-        (function( $ ) {
 
-            $.fn.colis = function(opts) {                
-                return this.each(function() {
+        (function ($) {
+
+            $.fn.colis = function (opts) {
+                return this.each(function () {
                     var jInput = $(this);
                     var options = $.extend({}, opts);
                     options.jInput = jInput;
@@ -195,8 +205,8 @@ if ('undefined' === typeof window.colis) {
                 });
             };
 
-        }( jQuery ));
-        
-        
+        }(jQuery));
+
+
     })();
 }

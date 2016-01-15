@@ -27,80 +27,50 @@ Colis global picture
 Colis options
 -----------------
 
+```js
+{
+    selector: {}, // selector reserved conf
+    preview: {}, // preview reserved conf
+    uploader: {}, // uploader reserved conf
 
-### requestPayload
-
-Default: {}
-
-A map that should be sent to each request to a service.
-
-
-### items
-
-Default: []
-
-An array of item names that should be selectable through the selector component.
-
-
-### jInput 
-
-Default: null 
-
-A jquery instance representing the selector object.
-Originally, colis wasn't a jquery plugin, and you had to pass this parameter manually.
-Although this option still works, if you instantiate colis as a jquery plugin, 
-this is done automatically for you and you shouldn't bother about this parameter. 
-
-
-
-### uploader
- 
-Default: {}
-
-A map representing the configuration of the uploader.
-
-
-
-### preview
- 
-Default: {}
-
-A map representing the configuration of the preview.
-
-
-
-### selector
- 
-Default: {}
-
-A map representing the configuration of the selector.
+    /**
+     * This is the jquery handle to the selector element.
+     * It is required but set automatically if you instantiate colis
+     * as a jquery plugin
+     */
+    jInput: null,
+    /**
+     * The items to display in the selector.
+     * Items can be:
+     * - an array of item names
+     */
+    items: [],
+    /**
+     * url of the info service
+     */
+    urlInfo: '/libs/colis/service/ling/colis_info_fast.php',
+    /**
+     * This should be sent to each service request.
+     * You can use this to build application logic.
+     */
+    requestPayload: {},
+    /**
+     * Should be called everytime a service call responds with an (tim) error
+     */
+    onRequestError: function (m) {
+        console.log(m);
+    },
+    /**
+     * void  function ( info )
+     *      What's inside info depends on your implementation.
+     *      info array is returned from the colis_info service.
+     */
+    onPreviewDisplayAfter: noop
+}
+```
 
 
-### onRequestError
 
-Default: function (m) { console.log(m); }
-
-
-A callback that should be called whenever a request to a service fails.
-It receives the error message as its first argument.
-
-
-### urlInfo
-
-Default: /libs/colis/service/ling/colis_info_fast.php
-
-
-A string representing the url to the info service.
-Note: the default value uses [wass0 convention](https://github.com/lingtalfi/ConventionGuy/blob/master/convention/wass0/convention.wass0.eng.md).
-
-
-### onPreviewDisplayAfter
-
-Default: function(info){}
-
-A callback triggered after that the preview has been displayed.
-This allows us to update other controls for instance.
-The content of the info map depends on the implementation you use.
 
 
 
