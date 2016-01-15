@@ -8,7 +8,7 @@ use Tim\TimServer\TimServerInterface;
 //------------------------------------------------------------------------------/
 // COLIS LING - INFO SERVICE - PROFILES VERSION
 //------------------------------------------------------------------------------/
-require_once 'inc/colis_init_profiles.php';
+require_once 'inc/colis_init_profiles.php'; // replace this with your application init in prod
 
 
 TimServer::create()->start(function (TimServerInterface $s) {

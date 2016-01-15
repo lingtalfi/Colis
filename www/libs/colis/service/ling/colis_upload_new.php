@@ -8,7 +8,7 @@ use Tim\TimServer\TimServerInterface;
 //------------------------------------------------------------------------------/
 // COLIS LING - UPLOAD SERVICE - NEW VERSION
 //------------------------------------------------------------------------------/
-require_once __DIR__ . "/../../../../../init.php"; // should target your application init
+require_once __DIR__ . "/../../../../../init.php"; // replace this with your application init in prod
 
 
 /**

@@ -4,7 +4,7 @@
 use Tim\TimServer\TimServer;
 use Tim\TimServer\TimServerInterface;
 
-require_once 'inc/colis_init_mixed.php';
+require_once 'inc/colis_init_mixed.php'; // replace this with your application init in prod
 
 //------------------------------------------------------------------------------/
 // COLIS LING - UPLOAD SERVICE - MIXED VERSION
