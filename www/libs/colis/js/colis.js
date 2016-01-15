@@ -191,6 +191,7 @@ if ('undefined' === typeof window.colis) {
                 this.getSelector().appendItem(nameAndInfo.name);
                 this.getSelector().setValue(nameAndInfo.name);
                 this.getPreview().display(nameAndInfo.info);
+                this.get('onPreviewDisplayAfter')(nameAndInfo.info, this);
             }
         };
 
