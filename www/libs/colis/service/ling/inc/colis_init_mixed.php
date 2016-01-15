@@ -18,7 +18,7 @@ require_once "bigbang.php"; // start the local universe
  */
 
 define('WEB_ROOT_DIR', realpath(__DIR__ . "/../../../../../../www"));
-define('YOUTUBE_API_KEY', "AIzaSyCgcYM2L79l0BI18EgwbtPoPLGh3kd_Ha4"); // use your youtube api key here
+define('YOUTUBE_API_KEY', "your API_KEY here..."); // use your youtube api key here
 define('ITEMS_DIR_URL', '/uploads');
 define('TARGET_DIR', WEB_ROOT_DIR . ITEMS_DIR_URL);
 

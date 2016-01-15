@@ -13,7 +13,7 @@ require_once "demo.func.php";
 
 
 define('WEB_ROOT_DIR', realpath(__DIR__ . "/../../../../../../www"));
-define('YOUTUBE_API_KEY', "your YouTube API_KEY here..."); // use your youtube api key here
+define('YOUTUBE_API_KEY', "your API_KEY here..."); // use your youtube api key here
 define('ITEMS_DIR_URL', '/uploads');
 
 
