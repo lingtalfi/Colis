@@ -228,6 +228,10 @@ Dependencies
 History Log
 ------------------
     
+- 2.1.0 -- 2016-01-16
+
+    - colis-ling: read default value at startup if any 
+    
 - 2.0.0 -- 2016-01-14
 
     - reforged colis-ling services

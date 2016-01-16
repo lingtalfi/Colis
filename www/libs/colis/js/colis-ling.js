@@ -525,6 +525,12 @@
             this.getSelector().build(this, conf.selector);
             this.getPreview().build(this, conf.preview);
             this.getUploader().build(this, conf.uploader);
+
+            // if there is a default value, let's use it already!
+            var defVal = conf.jInput.val();
+            if (defVal) {
+                conf.jInput.trigger('paste');
+            }
         };
 
     }
