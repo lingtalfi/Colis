@@ -1,7 +1,7 @@
 <?php
 
 
-use Tim\TimServer\TimServer;
+use Tim\TimServer\OpaqueTimServer;
 use Tim\TimServer\TimServerInterface;
 
 
@@ -11,7 +11,9 @@ require_once 'inc/colis_init_mixed.php'; // replace this with your application i
 //------------------------------------------------------------------------------/
 // COLIS LING - INFO SERVICE - MIXED VERSION
 //------------------------------------------------------------------------------/
-TimServer::create()->start(function (TimServerInterface $s) {
+OpaqueTimServer::create()
+    ->setServiceName('colis.ling_info_mixed')
+    ->start(function (TimServerInterface $s) {
 
 
     if (isset($_REQUEST["id"])) {

@@ -1,7 +1,7 @@
 <?php
 
 
-use Tim\TimServer\TimServer;
+use Tim\TimServer\OpaqueTimServer;
 use Tim\TimServer\TimServerInterface;
 
 
@@ -63,7 +63,9 @@ require_once __DIR__ . "/../../../../../init.php"; // replace this with your app
  */
 
 
-TimServer::create()->start(function (TimServerInterface $s) {
+OpaqueTimServer::create()
+    ->setServiceName('colis.ling_upload_new')
+    ->start(function (TimServerInterface $s) {
     colis_get_handler()->handle($s);
 })
     ->output();

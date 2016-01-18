@@ -1,7 +1,7 @@
 <?php
 
 
-use Tim\TimServer\TimServer;
+use Tim\TimServer\OpaqueTimServer;
 use Tim\TimServer\TimServerInterface;
 
 
@@ -11,7 +11,9 @@ use Tim\TimServer\TimServerInterface;
 require_once 'inc/colis_init_profiles.php'; // replace this with your application init in prod
 
 
-TimServer::create()->start(function (TimServerInterface $s) {
+OpaqueTimServer::create()
+    ->setServiceName('colis.ling_info_profiles')
+    ->start(function (TimServerInterface $s) {
 
     if (isset($_REQUEST["id"])) {
 

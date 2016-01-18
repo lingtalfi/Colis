@@ -1,7 +1,7 @@
 <?php
 
 
-use Tim\TimServer\TimServer;
+use Tim\TimServer\OpaqueTimServer;
 use Tim\TimServer\TimServerInterface;
 
 require_once 'inc/colis_init_mixed.php'; // replace this with your application init in prod
@@ -9,7 +9,9 @@ require_once 'inc/colis_init_mixed.php'; // replace this with your application i
 //------------------------------------------------------------------------------/
 // COLIS LING - UPLOAD SERVICE - MIXED VERSION
 //------------------------------------------------------------------------------/
-TimServer::create()->start(function (TimServerInterface $s) {
+OpaqueTimServer::create()
+    ->setServiceName('colis.ling_upload_mixed')
+    ->start(function (TimServerInterface $s) {
     
     
     // Make sure file is not cached (as it happens for example on iOS devices)

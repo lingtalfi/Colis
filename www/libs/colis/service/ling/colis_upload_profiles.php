@@ -132,7 +132,10 @@ require_once __DIR__ . '/inc/colis_init_profiles.php'; // replace this with your
  *
  */
 
-OpaqueTimServer::create()->start(function (TimServerInterface $s) {
+$serviceName = "";
+OpaqueTimServer::create()
+    ->setServiceName('colis.ling_upload_profiles')
+    ->start(function (TimServerInterface $s) {
 
 
     //------------------------------------------------------------------------------/

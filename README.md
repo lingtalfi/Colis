@@ -220,13 +220,17 @@ Dependencies
 
 - [lingtalfi/Bat 1.27](https://github.com/lingtalfi/Bat)
 - [lingtalfi/YouTubeUtils 1.1.0](https://github.com/lingtalfi/YouTubeUtils), only if you want to get youtube preview when pasting a youtube url in the selector (input)
-- [lingtalfi/Tim 1.2.0](https://github.com/lingtalfi/Tim), only if you use the colis_upload_new service, skip if you don't know what that is
+- [lingtalfi/Tim 1.5.0](https://github.com/lingtalfi/Tim), only if you use the colis_upload_new service, skip if you don't know what that is
 - [lingtalfi/UploaderHandler 1.0.0](https://github.com/lingtalfi/UploaderHandler), only if you use the colis_upload_new service, skip if you don't know what that is
 
 
 
 History Log
 ------------------
+    
+- 2.2.0 -- 2016-01-18
+
+    - colis-ling: demo services now use Opaque Tim server 
     
 - 2.1.0 -- 2016-01-16
 

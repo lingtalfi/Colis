@@ -36,7 +36,7 @@
  */
 
 
-use Tim\TimServer\TimServer;
+use Tim\TimServer\OpaqueTimServer;
 use Tim\TimServer\TimServerInterface;
 
 
@@ -47,7 +47,9 @@ require_once 'inc/colis_init_fast.php'; // replace this with your application in
 //------------------------------------------------------------------------------/
 // COLIS LING - UPLOAD SERVICE - FAST VERSION
 //------------------------------------------------------------------------------/
-TimServer::create()->start(function (TimServerInterface $s) {
+OpaqueTimServer::create()
+    ->setServiceName('colis.ling_upload_fast')
+    ->start(function (TimServerInterface $s) {
 
 
     //------------------------------------------------------------------------------/
