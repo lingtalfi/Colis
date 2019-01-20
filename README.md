@@ -8,7 +8,17 @@ Colis is an input form control connected to a library of user items (videos, ima
  
  
  
-Colis can be installed as a [planet](https://github.com/lingtalfi/Observer/blob/master/article/article.planetReference.eng.md).
+Colis is part of the [universe framework](https://github.com/karayabin/universe-snapshot).
+
+
+Install
+=============
+
+
+Using the [uni tool](https://github.com/lingtalfi/universe-naive-importer)
+```bash
+uni import Colis
+```
 
 
  
