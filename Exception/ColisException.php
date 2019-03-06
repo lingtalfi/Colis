@@ -1,6 +1,6 @@
 <?php
 
-namespace Colis\Exception;
+namespace Ling\Colis\Exception;
 
 /*
  * LingTalfi 2016-01-12

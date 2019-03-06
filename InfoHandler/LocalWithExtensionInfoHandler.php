@@ -1,14 +1,14 @@
 <?php
 
-namespace Colis\InfoHandler;
+namespace Ling\Colis\InfoHandler;
 
 /*
  * LingTalfi 2016-01-11
  */
 
-use Bat\FileSystemTool;
-use Colis\Exception\ColisException;
-use DirScanner\DirScanner;
+use Ling\Bat\FileSystemTool;
+use Ling\Colis\Exception\ColisException;
+use Ling\DirScanner\DirScanner;
 
 class LocalWithExtensionInfoHandler extends WithExtensionInfoHandler
 {

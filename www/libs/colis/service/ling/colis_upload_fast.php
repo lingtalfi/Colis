@@ -36,8 +36,8 @@
  */
 
 
-use Tim\TimServer\OpaqueTimServer;
-use Tim\TimServer\TimServerInterface;
+use Ling\Tim\TimServer\OpaqueTimServer;
+use Ling\Tim\TimServer\TimServerInterface;
 
 
 require_once 'inc/colis_init_fast.php'; // replace this with your application init in prod

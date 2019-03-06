@@ -1,11 +1,11 @@
 <?php
 
-namespace Colis\ColisUploadHandler;
+namespace Ling\Colis\ColisUploadHandler;
 
 /*
  * LingTalfi 2016-01-14
  */
-use Tim\TimServer\TimServerInterface;
+use Ling\Tim\TimServer\TimServerInterface;
 
 interface ColisUploadHandlerInterface {
 

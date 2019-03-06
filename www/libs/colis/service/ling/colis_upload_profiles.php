@@ -1,8 +1,8 @@
 <?php
 
 
-use Tim\TimServer\OpaqueTimServer;
-use Tim\TimServer\TimServerInterface;
+use Ling\Tim\TimServer\OpaqueTimServer;
+use Ling\Tim\TimServer\TimServerInterface;
 
 //------------------------------------------------------------------------------/
 // COLIS LING - UPLOAD SERVICE - PROFILES VERSION

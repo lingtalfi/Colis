@@ -1,10 +1,10 @@
 <?php
 
-namespace Colis\UploaderHandler;
+namespace Ling\Colis\UploaderHandler;
 
 
-use Colis\InfoHandler\InfoHandlerInterface;
-use UploaderHandler\TimMixedUploaderHandler;
+use Ling\Colis\InfoHandler\InfoHandlerInterface;
+use Ling\UploaderHandler\TimMixedUploaderHandler;
 
 class ColisTimUploaderHandler extends TimMixedUploaderHandler
 {

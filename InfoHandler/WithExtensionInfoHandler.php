@@ -1,12 +1,12 @@
 <?php
 
-namespace Colis\InfoHandler;
+namespace Ling\Colis\InfoHandler;
 
 /*
  * LingTalfi 2016-01-11
  */
 
-use Bat\FileSystemTool;
+use Ling\Bat\FileSystemTool;
 
 class WithExtensionInfoHandler extends InfoHandler
 {

@@ -17,7 +17,7 @@ Install
 
 Using the [uni tool](https://github.com/lingtalfi/universe-naive-importer)
 ```bash
-uni import Colis
+uni import Ling/Colis
 ```
 
 
@@ -119,7 +119,7 @@ Then open the "test.php" file and paste the following code.
 <?php
 
 
-use DirScanner\YorgDirScannerTool;
+use Ling\DirScanner\YorgDirScannerTool;
 require_once "bigbang.php"; // start the local universe
 $uploadDir = __DIR__ . '/uploads';
 $uploadedFiles = YorgDirScannerTool::getFiles($uploadDir, true, true);

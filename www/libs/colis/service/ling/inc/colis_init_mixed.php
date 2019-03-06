@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------/
 // COLIS LING - DEMO INIT - MIXED VERSION
 //------------------------------------------------------------------------------/
-use Colis\InfoHandler\ImageInfoHandler;
-use Colis\InfoHandler\VideoInfoHandler;
-use Colis\InfoHandler\YouTubeInfoHandler;
-use Colis\ServiceHandler\LingColisServiceHandler;
+use Ling\Colis\InfoHandler\ImageInfoHandler;
+use Ling\Colis\InfoHandler\VideoInfoHandler;
+use Ling\Colis\InfoHandler\YouTubeInfoHandler;
+use Ling\Colis\ServiceHandler\LingColisServiceHandler;
 
 require_once "bigbang.php"; // start the local universe
 

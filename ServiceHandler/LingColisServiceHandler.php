@@ -1,12 +1,12 @@
 <?php
 
-namespace Colis\ServiceHandler;
+namespace Ling\Colis\ServiceHandler;
 
 /*
  * LingTalfi 2016-01-14
  */
-use Colis\InfoHandler\InfoHandlerInterface;
-use Tim\TimServer\TimServerInterface;
+use Ling\Colis\InfoHandler\InfoHandlerInterface;
+use Ling\Tim\TimServer\TimServerInterface;
 
 class LingColisServiceHandler implements LingColisServiceHandlerInterface
 {

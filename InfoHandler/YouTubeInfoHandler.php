@@ -1,12 +1,12 @@
 <?php
 
-namespace Colis\InfoHandler;
+namespace Ling\Colis\InfoHandler;
 
 /*
  * LingTalfi 2016-01-14
  */
-use YouTubeUtils\YouTubeTool;
-use YouTubeUtils\YouTubeVideo;
+use Ling\YouTubeUtils\YouTubeTool;
+use Ling\YouTubeUtils\YouTubeVideo;
 
 class YouTubeInfoHandler implements InfoHandlerInterface
 {

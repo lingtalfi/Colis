@@ -1,6 +1,6 @@
 <?php
 
-namespace Colis\InfoHandler;
+namespace Ling\Colis\InfoHandler;
 
 /*
  * LingTalfi 2016-01-14
@@ -9,7 +9,7 @@ namespace Colis\InfoHandler;
  *          This default implementation uses the ffprobe tool to get the duration of local videos.
  */
 
-use Bat\FileSystemTool;
+use Ling\Bat\FileSystemTool;
 
 class VideoInfoHandler implements InfoHandlerInterface
 {

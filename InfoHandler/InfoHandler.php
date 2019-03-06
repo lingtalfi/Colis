@@ -1,6 +1,6 @@
 <?php
 
-namespace Colis\InfoHandler;
+namespace Ling\Colis\InfoHandler;
 
 /*
  * LingTalfi 2016-01-12
